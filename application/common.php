@@ -74,7 +74,7 @@ function getClientIp()
  * @param int $expiry   有效时间
  * @return bool|string
  */
-function authcode($string, $operation = 'DECODE', $key = 'mapgoo.net', $expiry = 0) {
+function authcode($string, $operation = 'DECODE', $key = 'cove', $expiry = 0) {
     if($operation == 'DECODE'){
         $string = base64_decode(str_replace(['/', '_'], ['+', '-'], $string));
     }
@@ -138,4 +138,9 @@ function authcode($string, $operation = 'DECODE', $key = 'mapgoo.net', $expiry =
         $str = $keyc.str_replace('=', '', base64_encode($result));
         return base64_encode(str_replace(['+', '-'], ['/', '_'], $str));
     }
+}
+
+function urlCompletion($url)
+{
+    return $url;
 }

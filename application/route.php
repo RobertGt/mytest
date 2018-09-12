@@ -12,9 +12,30 @@
 use think\Route;
 
 Route::post([
-    'v1/cancelOrder'        => 'api/Order/cancelOrder',
+    'v1/taskCreate'        => 'api/Task/taskCreate',
+    'v1/taskDelete'        => 'api/Task/taskDelete',
+    'v1/taskUpdate'        => 'api/Task/taskUpdate',
+    'v1/taskSort'          => 'api/Task/taskSort',
+    'v1/taskUpload'        => 'api/Task/taskUpload',
+
+    'v1/setting'           => 'api/Configure/setting',
 ]);
 
 Route::get([
-    'v1/getOrderList'       => 'api/Order/orderList',
+    'v1/taskList'          => 'api/Task/taskList',
+    'v1/taskIcon'          => 'api/Task/taskIcon',
+    'v1/taskNext'          => 'api/Task/taskNext',
+
+    'v1/taskStatistic'     => 'api/Statistic/taskStatistic',
+    'v1/taskDistribution'  => 'api/Statistic/taskDistribution',
+    'v1/taskCurve'         => 'api/Statistic/taskCurve',
+    'v1/coveStatistic'     => 'api/Statistic/coveStatistic',
+    'v1/coveCurve'         => 'api/Statistic/coveCurve',
+
+    'v1/articleList'       => 'api/Article/articleList',
+    'v1/articleInfo'       => 'api/Article/articleInfo',
+
+    'v1/settingInfo'       => 'api/Configure/settingInfo',
+    'v1/theme'             => 'api/Configure/theme',
+    'v1/ring'              => 'api/Configure/ring',
 ]);

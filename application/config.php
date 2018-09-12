@@ -43,4 +43,7 @@ return [
 
     // 默认模块名
     'default_module'         => 'api',
+
+    //app请求密钥
+    'app_key'   =>  '7c6fe563abc91f43be71d5bc9072329f'
 ];
