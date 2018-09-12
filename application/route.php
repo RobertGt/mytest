@@ -9,13 +9,12 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
+use think\Route;
 
-];
+Route::post([
+    'v1/cancelOrder'        => 'index/Order/cancelOrder',
+]);
+
+Route::get([
+    'v1/getOrderList'       => 'index/Order/orderList',
+]);
