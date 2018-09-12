@@ -12,9 +12,9 @@
 use think\Route;
 
 Route::post([
-    'v1/cancelOrder'        => 'index/Order/cancelOrder',
+    'v1/cancelOrder'        => 'api/Order/cancelOrder',
 ]);
 
 Route::get([
-    'v1/getOrderList'       => 'index/Order/orderList',
+    'v1/getOrderList'       => 'api/Order/orderList',
 ]);
