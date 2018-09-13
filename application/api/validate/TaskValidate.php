@@ -17,7 +17,7 @@ class TaskValidate extends Validate
         'imei'        => 'require',
         'taskName'    => 'checkTaskName',
         'colour'      => 'require',
-        'iconId'      => 'checkIconId',
+        'iconId'      => 'integer',
         'taskId'      => 'checkTaskId'
     ];
 
@@ -39,15 +39,6 @@ class TaskValidate extends Validate
 
         if(mb_strlen($taskName) > 15){
             return '任务名称不得超过15位字符';
-        }
-
-        return true;
-    }
-
-    public function checkIconId($iconId, $rule, $data)
-    {
-        if(!$iconId || !authcode($iconId)){
-            return 'icon错误';
         }
 
         return true;

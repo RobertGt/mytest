@@ -30,7 +30,7 @@ class TaskModel extends Model
                     ->join($this->iconModel . ' i' , 't.iconId = i.iconId' , 'LEFT')
                     ->field('t.taskId, t.taskName, t.colour, i.iconUrl')
                     ->page($pageNum, $pageSize)
-                    ->order('sort DESC, updateTime DESC')
+                    ->order('t.sort DESC, t.updateTime DESC')
                     ->select();
         return $task;
     }
