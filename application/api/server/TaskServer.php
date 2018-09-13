@@ -101,7 +101,7 @@ class TaskServer
         $create['taskId']    = $where['taskId'];
         $create['second']    = $param['second'];
         $create['absorbed']  = $param['absorbed'] ? 1 : 0;
-        $create['remark']    = $task['remark'];
+        $create['remark']    = $param['remark'];
 
         try{
             $taskModel->create($create);
