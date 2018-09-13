@@ -123,9 +123,9 @@ class TaskServer
         }
         $task = $task->getData();
         $where = [
-            'imei'        => $task['imei'],
-            'sort'        => ['elt', $task['sort']],
-            'updateTime'  => ['lt', $task['updateTime']]
+            't.imei'        => $task['imei'],
+            't.sort'        => ['elt', $task['sort']],
+            't.updateTime'  => ['lt', $task['updateTime']]
         ];
 
         $taskInfo = $taskModel->taskInfo($where);
