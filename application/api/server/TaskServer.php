@@ -99,7 +99,7 @@ class TaskServer
         $task = $task->getData();
         $create['imei']      = $task['imei'];
         $create['taskId']    = $where['taskId'];
-        $create['second']    = $param['second'];
+        $create['seconds']   = $param['second'];
         $create['absorbed']  = $param['absorbed'] ? 1 : 0;
         $create['remark']    = $param['remark'];
 
