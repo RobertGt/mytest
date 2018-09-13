@@ -10,6 +10,7 @@ namespace app\api\server;
 
 
 use app\api\model\IconModel;
+use app\api\model\TaskFinishModel;
 use app\api\model\TaskModel;
 use think\Exception;
 use think\Log;
@@ -89,9 +90,8 @@ class TaskServer
 
     public function taskUpload($param = [])
     {
-        $taskModel = new TaskModel();
         $where['taskId'] = authcode($param['taskId']);
-        $task = $taskModel->field('imei')->where($where)->find();
+        $task = (new TaskModel())->field('imei')->where($where)->find();
         if(!$task){
             Log::info("taskUpload not find task:" . $where['taskId'] );
             return false;
@@ -103,7 +103,7 @@ class TaskServer
         $create['absorbed']  = $param['absorbed'] ? 1 : 0;
         $create['remark']    = $param['remark'];
 
-        $taskModel->create($create);
+        (new TaskFinishModel())->create($create);
         return true;
     }
 
