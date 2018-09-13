@@ -47,13 +47,10 @@ class TaskModel extends Model
 
     public function imeiTaskListByTaskId($taskId)
     {
-       // $buildSql = $this->where(['taskId' => $taskId])->field('imei')->buildSql();
         $table = $this->table;
-        $taskList = $this->field('taskId, sort')->where('imei', 'IN', function ($query) use ($taskId, $table) {
+        $taskList = $this->field('taskId')->where('imei', 'IN', function ($query) use ($taskId, $table) {
                         $query->table($table)->where(['taskId' => $taskId])->field('imei');
                     })->select();
-
-        //$taskList = $this->field('taskId, sort')->where(['imei', ['exp', "in({$buildSql})"]])->select();
 
         return $taskList;
     }

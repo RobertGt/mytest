@@ -152,9 +152,9 @@ class TaskServer
         $count = count($taskList);
         foreach ($taskList as $key => $value){
             $info = $value->getData();
-            if($value['taskId'] == $taskId){
+            if($info['taskId'] == $taskId){
                 $moveKey = $key;
-                $moveInfo = $info;
+                $moveInfo = $taskId;
                 continue;
             }
 
@@ -162,7 +162,7 @@ class TaskServer
                 $afterKey = $key;
             }
 
-            $task[$key] = $info;
+            $task[$key] = $info['taskId'];
         }
 
         if(!$moveKey && !$afterKey && !$moveInfo){
@@ -170,15 +170,15 @@ class TaskServer
         }
 
         if(!$afterId){
-            array_unshift($task, $moveInfo);
+            array_unshift($task, $taskId);
         }else{
-            array_splice($task, $afterKey, 0, $moveInfo);
+            array_splice($task, $afterKey, 0, $taskId);
         }
 
         try{
             $taskModel->startTrans();
             foreach ($task as $value){
-                $taskModel->save(['sort' => $count--], ['taskId' => $value['taskId']]);
+                $taskModel->save(['sort' => $count--], ['taskId' => $value]);
             }
             $taskModel->commit();
         }catch (Exception $e){
