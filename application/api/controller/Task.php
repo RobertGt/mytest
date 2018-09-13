@@ -52,7 +52,7 @@ class Task extends Base
         if($response){
             ajax_info(0,'success');
         }else{
-            ajax_info(0,'任务建立失败');
+            ajax_info(1,'任务建立失败');
         }
     }
 
@@ -73,7 +73,7 @@ class Task extends Base
         if($response){
             ajax_info(0,'success');
         }else{
-            ajax_info(0,'任务删除失败');
+            ajax_info(1,'任务删除失败');
         }
     }
 
@@ -96,7 +96,7 @@ class Task extends Base
         if($response){
             ajax_info(0,'success');
         }else{
-            ajax_info(0,'任务修改失败');
+            ajax_info(1,'任务修改失败');
         }
     }
 
@@ -109,16 +109,61 @@ class Task extends Base
 
     public function taskSort(Request $request)
     {
+        $param = [
+            'taskId'    => $request->param('moveTaskId',''),
+            'afterId'   => $request->param('taskId',''),
+        ];
 
+        $validate = new TaskValidate();
+        if(!$validate->scene('taskUpload')->check($param)){
+            ajax_info(1 , $validate->getError());
+        }
+
+        $response = (new TaskServer())->taskSort($param);
+
+        if($response){
+            ajax_info(0,'success');
+        }else{
+            ajax_info(1,'操作失败');
+        }
     }
 
     public function taskNext(Request $request)
     {
+        $param = [
+            'taskId'    => $request->param('taskId',''),
+        ];
 
+        $validate = new TaskValidate();
+        if(!$validate->scene('taskUpload')->check($param)){
+            ajax_info(1 , $validate->getError());
+        }
+
+        $response = (new TaskServer())->taskNext($param['taskId']);
+
+        ajax_info(0,'success', $response, false);
     }
 
     public function taskUpload(Request $request)
     {
+        $param = [
+            'taskId'    => $request->param('taskId',''),
+            'second'    => $request->param('second',0, 'intval'),
+            'absorbed'  => $request->param('absorbed',0, 'intval'),
+            'remark'    => $request->param('remark','')
+        ];
 
+        $validate = new TaskValidate();
+        if(!$validate->scene('taskUpload')->check($param)){
+            ajax_info(1 , $validate->getError());
+        }
+
+        $response = (new TaskServer())->taskUpload($param);
+
+        if($response){
+            ajax_info(0,'success');
+        }else{
+            ajax_info(1,'上传失败');
+        }
     }
 }

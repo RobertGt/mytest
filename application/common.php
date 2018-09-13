@@ -75,9 +75,6 @@ function getClientIp()
  * @return bool|string
  */
 function authcode($string, $operation = 'DECODE', $key = 'cove', $expiry = 0) {
-    if($operation == 'DECODE'){
-        $string = base64_decode(str_replace(['/', '_'], ['+', '-'], $string));
-    }
     // 动态密匙长度，相同的明文会生成不同密文就是依靠动态密匙
     $ckey_length = 4;
 
@@ -135,8 +132,8 @@ function authcode($string, $operation = 'DECODE', $key = 'cove', $expiry = 0) {
     } else {
         // 把动态密匙保存在密文里，这也是为什么同样的明文，生产不同密文后能解密的原因
         // 因为加密后的密文可能是一些特殊字符，复制过程可能会丢失，所以用base64编码
-        $str = $keyc.str_replace('=', '', base64_encode($result));
-        return base64_encode(str_replace(['+', '-'], ['/', '_'], $str));
+        $str = $keyc . str_replace('=', '', base64_encode($result));
+        return $str;
     }
 }
 

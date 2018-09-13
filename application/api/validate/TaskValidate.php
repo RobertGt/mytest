@@ -18,7 +18,8 @@ class TaskValidate extends Validate
         'taskName'    => 'checkTaskName',
         'colour'      => 'require',
         'iconId'      => 'integer',
-        'taskId'      => 'checkTaskId'
+        'taskId'      => 'checkTaskId',
+        "second"      => 'integer|gt:0',
     ];
 
     protected $message  =   [
@@ -30,6 +31,8 @@ class TaskValidate extends Validate
         'taskCreate'     =>  ['imei', 'taskName', 'colour', 'iconId'],
         'taskDelete'     =>  ['imei', 'taskId'],
         'taskEdit'       =>  ['taskName', 'colour', 'iconId', 'taskId'],
+        'taskUpload'     =>  ['taskId', 'second'],
+        'taskNext'       =>  ['taskId'],
     ];
 
     public function checkTaskName($taskName, $rule, $data){

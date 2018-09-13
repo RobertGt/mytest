@@ -86,4 +86,111 @@ class TaskServer
         
         return $info;
     }
+
+    public function taskUpload($param = [])
+    {
+        $taskModel = new TaskModel();
+        $where['taskId'] = authcode($param['taskId']);
+        $task = $taskModel->field('imei')->where($where)->find();
+        if(!$task){
+            Log::info("taskUpload not find task:" . $where['taskId'] );
+            return false;
+        }
+        $task = $task->getData();
+        $create['imei']      = $task['imei'];
+        $create['taskId']    = $where['taskId'];
+        $create['second']    = $param['second'];
+        $create['absorbed']  = $param['absorbed'] ? 1 : 0;
+        $create['remark']    = $task['remark'];
+
+        try{
+            $taskModel->create($create);
+        }catch (Exception $e){
+            Log::error("taskUpload error:" . $e->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public function taskNext($taskId = "")
+    {
+        $taskModel = new TaskModel();
+        $where['taskId'] = authcode($taskId);
+        $task = $taskModel->field('imei, sort, updateTime')->where($where)->find();
+        if(!$task){
+            Log::info("taskNext not find task:" . $where['taskId'] );
+            return [];
+        }
+        $task = $task->getData();
+        $where = [
+            'imei'        => $task['imei'],
+            'sort'        => ['elt', $task['sort']],
+            'updateTime'  => ['lt', $task['updateTime']]
+        ];
+
+        $taskInfo = $taskModel->taskInfo($where);
+
+        if(!$taskInfo){
+            return [];
+        }
+
+        $taskInfo = $taskInfo->getData();
+        $taskInfo['taskId'] = authcode($taskInfo['taskId'], 'ENCODE');
+
+        return $taskInfo;
+    }
+
+    public function taskSort($param = [])
+    {
+        $taskModel = new TaskModel();
+
+        $taskId = authcode($param['taskId']);
+
+        $afterId = $param['afterId'] ? authcode($param['afterId']) : 0;
+
+        $taskList =  $taskModel->imeiTaskListByTaskId($taskId);
+
+        $task = [];
+        $moveKey = 0;
+        $afterKey = 0;
+        $moveInfo = [];
+        $count = count($taskList);
+        foreach ($taskList as $key => $value){
+            $info = $value->getData();
+            if($value['taskId'] == $taskId){
+                $moveKey = $key;
+                $moveInfo = $info;
+                continue;
+            }
+
+            if($value['taskId'] == $afterId){
+                $afterKey = $key;
+            }
+
+            $task[$key] = $info;
+        }
+
+        if(!$moveKey && !$afterKey && !$moveInfo){
+            return true;
+        }
+
+        if(!$afterId){
+            array_unshift($task, $moveInfo);
+        }else{
+            array_splice($task, $afterKey, 0, $moveInfo);
+        }
+
+        try{
+            $taskModel->startTrans();
+            foreach ($task as $value){
+                $taskModel->save(['sort' => $count--], ['taskId' => $value['taskId']]);
+            }
+            $taskModel->commit();
+        }catch (Exception $e){
+            $taskModel->rollback();
+            Log::error("taskSort error:" . $e->getMessage());
+            return false;
+        }
+        return true;
+    }
 }

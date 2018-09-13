@@ -34,4 +34,23 @@ class TaskModel extends Model
                     ->select();
         return $task;
     }
+
+    public function taskInfo($where = []){
+        $task = $this->alias('t')
+            ->join($this->iconModel . ' i' , 't.iconId = i.iconId' , 'LEFT')
+            ->field('t.taskId, t.taskName, t.colour, i.iconUrl')
+            ->where($where)
+            ->order('t.sort DESC, t.updateTime DESC')
+            ->find();
+        return $task;
+    }
+
+    public function imeiTaskListByTaskId($taskId)
+    {
+        $buildSql = $this->where(['taskId' => $taskId])->field('imei')->buildSql();
+
+        $taskList = $this->where('taskId, sort')->where('imei', 'in', $buildSql)->select();
+
+        return $taskList;
+    }
 }
