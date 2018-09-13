@@ -49,7 +49,7 @@ class TaskModel extends Model
     {
         $buildSql = $this->where(['taskId' => $taskId])->field('imei')->buildSql();
 
-        $taskList = $this->where('taskId, sort')->where(['imei', ['in', $buildSql]])->select();
+        $taskList = $this->where('taskId, sort')->where(['imei', ['exp', "in({$buildSql})"]])->select();
 
         return $taskList;
     }
