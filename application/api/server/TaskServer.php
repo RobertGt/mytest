@@ -99,16 +99,11 @@ class TaskServer
         $task = $task->getData();
         $create['imei']      = $task['imei'];
         $create['taskId']    = $where['taskId'];
-        $create['seconds']   = $param['second'];
+        $create['second']   = $param['second'];
         $create['absorbed']  = $param['absorbed'] ? 1 : 0;
         $create['remark']    = $param['remark'];
 
-        try{
-            $taskModel->create($create);
-        }catch (Exception $e){
-            Log::error("taskUpload error:" . $e->getMessage());
-            return false;
-        }
+        $taskModel->create($create);
         return true;
     }
 
