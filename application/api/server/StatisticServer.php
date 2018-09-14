@@ -79,8 +79,8 @@ class StatisticServer
             }
             $unit = 'Y-m';
         }else if ($param['dateType'] == 1){
-            $start = strtotime(date("Y-m-d", strtotime("-4 week")));
-            $startTime = date('Ymd', strtotime("+1 day", $start));
+            $start = strtotime(date("Y-m-d", strtotime("-4 week") - 1));
+            $startTime = date('Ymd', $start);
             $endTime = date('Ymd', time());
             for ($i = $startTime; $i < $endTime; $i = date('Ymd', strtotime("+1 week", strtotime($i)))){
                 $date[] = [date('Y-m-d', strtotime($i)), date('Y-m-d', strtotime("+6 day", strtotime($i)))];
@@ -102,7 +102,7 @@ class StatisticServer
         $response['avg'] = 0;
         $total = 0;
         foreach ($date as $item){
-            $response['date'][] = is_array($item) ? $item[0] . '-' . $item[1] : $item;
+            $response['date'][] = is_array($item) ? $item[0] . ':' . $item[1] : $item;
             $num = 0;
             foreach ($taskList as $value){
                 $info = $value->getData();
