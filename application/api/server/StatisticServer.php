@@ -79,13 +79,14 @@ class StatisticServer
             }
             $unit = 'Y-m';
         }else if ($param['dateType'] == 1){
-            $start = strtotime(date("Y-m-d", strtotime("-4 week") - 1));
-            $startTime = date('Ymd', $start);
+            $start = strtotime(date("Y-m-d", strtotime("-4 week")));
+            $startTime = date('Ymd', strtotime("+1 day", $start));
             $endTime = date('Ymd', time());
             for ($i = $startTime; $i < $endTime; $i = date('Ymd', strtotime("+1 week", strtotime($i)))){
                 $date[] = [date('Y-m-d', strtotime($i)), date('Y-m-d', strtotime("+6 day", strtotime($i)))];
             }
             $unit = '';
+            $start = date("Y-m-d", strtotime($startTime));
         }else{
             $start = strtotime(date("Y-m-d", strtotime("-6 day")));
             for ($i = 6; $i >= 0; $i--){
