@@ -22,7 +22,7 @@ class TaskModel extends Model
 
     public function taskList($imei = '', $pageNum = 1, $pageSize = 10)
     {
-        $where = [];
+        $where['isDelete'] = 0;
         if($imei){
             $where['imei'] = $imei;
         }
@@ -50,7 +50,7 @@ class TaskModel extends Model
         $table = $this->table;
         $taskList = $this->field('taskId')->where('imei', 'IN', function ($query) use ($taskId, $table) {
                         $query->table($table)->where(['taskId' => $taskId])->field('imei');
-                    })->select();
+                    })->where('isDelete', 0)->select();
 
         return $taskList;
     }

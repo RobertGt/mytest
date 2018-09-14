@@ -49,7 +49,7 @@ class TaskServer
         try{
             $where['taskId'] = authcode($param['taskId']);
             $where['imei'] = $param['imei'];
-            (new TaskModel())->where($where)->delete();
+            (new TaskModel())->save(['isDelete' => 0, $where]);
         }catch (Exception $e){
             Log::error("taskDelete error:" . $e->getMessage());
             return false;
@@ -61,6 +61,7 @@ class TaskServer
     {
         try{
             $where['taskId'] = authcode($param['taskId']);
+            $where['isDelete'] = 0;
             $save['taskName'] = $param['taskName'];
             $save['colour'] = $param['colour'];
             $save['iconId'] = $param['iconId'];
@@ -120,7 +121,8 @@ class TaskServer
         $where = [
             't.imei'        => $task['imei'],
             't.sort'        => ['elt', $task['sort']],
-            't.updateTime'  => ['lt', $task['updateTime']]
+            't.updateTime'  => ['lt', $task['updateTime']],
+            't.isDelete'    => 0
         ];
 
         $taskInfo = $taskModel->taskInfo($where);
