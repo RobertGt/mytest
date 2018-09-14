@@ -70,7 +70,7 @@ class StatisticServer
         $date = [];
         $end = strtotime(date('Y-m-d', strtotime("+1 day")));
 
-        if($param['dateType'] == 1){
+        if($param['dateType'] == 2){
             $start = $taskFinishModel->minUploadTime($param['imei']);
             $startTime = date('Ym', $start);
             $endTime = date('Ym', $end);
@@ -78,7 +78,7 @@ class StatisticServer
                 $date[] = date('Y-m', strtotime($i));
             }
             $unit = 'Y-m';
-        }else if ($param['dateType'] == 2){
+        }else if ($param['dateType'] == 1){
             $start = strtotime(date("Y-m-d", strtotime("-4 week")));
             $startTime = date('Ymd', $start);
             $endTime = date('Ymd', $end);
@@ -89,7 +89,7 @@ class StatisticServer
         }else{
             $start = strtotime(date("Y-m-d", strtotime("-6 day")));
             for ($i = 6; $i >= 0; $i--){
-                $date[] = strtotime(date("Y-m-d", strtotime("-{$i} day")));
+                $date[] = date("Y-m-d", strtotime("-{$i} day"));
             }
             $unit = 'Y-m-d';
         }
