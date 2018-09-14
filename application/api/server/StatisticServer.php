@@ -80,10 +80,10 @@ class StatisticServer
             $unit = 'Y-m';
         }else if ($param['dateType'] == 1){
             $start = strtotime(date("Y-m-d", strtotime("-4 week")));
-            $startTime = date('Ymd', $start);
+            $startTime = date('Ymd', strtotime("+1 day", $start));
             $endTime = date('Ymd', $end);
-            for ($i = $startTime; $i < $endTime; $i = date('Ymd', strtotime("+1 week", strtotime($i)))){
-                $date[] = [date('Y-m-d', strtotime($i)), date('Y-m-d', strtotime("+7 day", strtotime($i)))];
+            for ($i = $startTime; $i <= $endTime; $i = date('Ymd', strtotime("+1 week", strtotime($i)))){
+                $date[] = [date('Y-m-d', strtotime($i)), date('Y-m-d', strtotime("+6 day", strtotime($i)))];
             }
             $unit = '';
         }else{
@@ -114,7 +114,7 @@ class StatisticServer
                     $time = strtotime(date('Y-m-d', $info['uploadTime']));
                     $start = strtotime($item[0]);
                     $end = strtotime($item[1]);
-                    if($time >=  $start && $time < $end){
+                    if($time >=  $start && $time <= $end){
                         $num += (int)$info['total'];
                     }
                 }
