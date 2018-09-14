@@ -174,7 +174,7 @@ class TaskServer
         if(!$afterId){
             array_unshift($task, $taskId);
         }else{
-            array_splice($task, $afterKey, 0, $taskId);
+            array_splice($task, $afterKey + 1, 0, $taskId);
         }
 
         try{

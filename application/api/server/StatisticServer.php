@@ -88,7 +88,7 @@ class StatisticServer
             $unit = '';
         }else{
             $start = strtotime(date("Y-m-d", strtotime("-6 day")));
-            for ($i = 6; $i >= 0; $i++){
+            for ($i = 6; $i >= 0; $i--){
                 $date[] = strtotime(date("Y-m-d", strtotime("-{$i} day")));
             }
             $unit = 'Y-m-d';
