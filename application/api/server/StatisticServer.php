@@ -125,7 +125,7 @@ class StatisticServer
             $total += $num;
         }
 
-        $response['avg'] = count($response['num']) ? $num / count($response['num']) : 0;
+        $response['avg'] = count($response['num']) ? round($num / count($response['num']), 1) : 0;
 
         return $response;
     }
