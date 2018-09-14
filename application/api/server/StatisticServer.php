@@ -74,7 +74,7 @@ class StatisticServer
             $start = $taskFinishModel->minUploadTime($param['imei']);
             $startTime = date('Ym', $start);
             $endTime = date('Ym', $end);
-            for ($i = $startTime; $i <= $endTime; $i = date(strtotime("+1 month", $startTime))){
+            for ($i = $startTime; $i <= $endTime; $i = date('Ym', strtotime("+1 month", strtotime($i)))){
                 $date[] = date('Y-m', strtotime($i));
             }
             $unit = 'Y-m';
@@ -82,8 +82,8 @@ class StatisticServer
             $start = strtotime(date("Y-m-d", strtotime("-4 week")));
             $startTime = date('Ymd', $start);
             $endTime = date('Ymd', $end);
-            for ($i = $startTime; $i <= $endTime; $i = date(strtotime("+1 week", $startTime))){
-                $date[] = [date('Y-m-d', strtotime($i)), date('Y-m-d', strtotime("+6 day", $i))];
+            for ($i = $startTime; $i <= $endTime; $i = date(strtotime("+1 week", strtotime($i)))){
+                $date[] = [date('Y-m-d', strtotime($i)), date('Y-m-d', strtotime("+6 day", strtotime($i)))];
             }
             $unit = '';
         }else{
