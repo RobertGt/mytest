@@ -27,7 +27,7 @@ class ArticleServer
             $info['thumb'] = urlCompletion($info['thumb']);
             $info['read'] = $info['read'] >= 10000 ? round($info['read'] / 10000, 1) . "万" : (string)$info['read'];
             $info['share'] = $info['share'] > 1000 ? $info['share'] . '+' : (string)$info['share'];
-            $info['url'] = sprintf($domain . "/v1/articleInfo?articleId=%s", $info['articleId']);
+            $info['url'] = sprintf($domain . "/v1/articleInfo?articleId=%s", urlencode($info['articleId']));
             $articleList[] = $info;
         }
 
