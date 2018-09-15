@@ -26,7 +26,7 @@ class Base
     {
         $request = Request::instance();
 
-        $pass = ['articleInfo'];
+        $pass = ['articleinfo'];
 
         $nonce     = $request->header('nonce', '');
         $timestamp = $request->header('timestamp', '');
