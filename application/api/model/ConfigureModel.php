@@ -25,7 +25,7 @@ class ConfigureModel extends Model
     {
         $field = "c.theme, t.taskColour, t.restColour, c.taskFinish, r1.ringName taskFinishRing, r1.ringUrl taskRingUrl, 
                    c.restFinish, r2.ringName restFinishRing, r2.ringUrl restRingUrl, c.noise, r3.ringName noiseRing, r3.ringUrl noiseRingUrl, 
-                   t.taskTime, t.sortRest, t.longRest, t.taskNum, t.autoNext, t.screenOn, t.shockOn, t.strict";
+                   c.taskTime, c.sortRest, c.longRest, c.taskNum, c.autoNext, c.screenOn, c.shockOn, c.strict";
         $setting = $this->alias('c')
                         ->join($this->themeModel . ' t' , 't.theme = c.theme', 'LEFT')
                         ->join($this->ringModel . ' r1' , 'r1.ringId = c.taskFinish', 'LEFT')
