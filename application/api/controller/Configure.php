@@ -9,6 +9,9 @@
 namespace app\api\controller;
 
 
+use app\api\server\ConfigureServer;
+use think\Request;
+
 class Configure extends Base
 {
     public function setting()
@@ -21,13 +24,19 @@ class Configure extends Base
 
     }
 
-    public function theme()
+    public function theme(Request $request)
     {
+        $response = (new ConfigureServer())->theme();
 
+        ajax_info(0,'success', $response);
     }
 
-    public function ring()
+    public function ring(Request $request)
     {
+        $noise = $request->param('noise', 0, 'intval') ? 1 : 0;
 
+        $response = (new ConfigureServer())->ring($noise);
+
+        ajax_info(0,'success', $response);
     }
 }
