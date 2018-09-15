@@ -81,9 +81,9 @@
                                     </li><li>
                                         <a href="#e5f6d431be254ebabfdc3cb88fe11368">获取铃声（完成）</a>
                                     </li><li>
-                                        <a href="#f5cc900d17d64cfaa6096e162749425b">设置</a>
+                                        <a href="#f5cc900d17d64cfaa6096e162749425b">设置（完成）</a>
                                     </li><li>
-                                        <a href="#43ac240938ed4f3296016f20fe886fb9">获取配置</a>
+                                        <a href="#43ac240938ed4f3296016f20fe886fb9">获取配置（完成）</a>
                                     </li>
                                 </ul>                                <span>附录</span>
                                 <ul class="nav list-group">
@@ -105,6 +105,7 @@
                     
                     <div class="api-one">
                         <h3 id="af9824b00a654256859af304eee73353">任务列表（完成）</h3>
+
                         <p>请求方式：GET</p>
                         <p>
                             请求地址：{{host}}/v1/taskList                        </p>
@@ -2338,7 +2339,7 @@
                                 </tr>                            </tbody>
                         </table>
                     </div><div class="api-one">
-                        <h3 id="f5cc900d17d64cfaa6096e162749425b">设置</h3>
+                        <h3 id="f5cc900d17d64cfaa6096e162749425b">设置（完成）</h3>
 
                         <p>请求方式：POST</p>
                         <p>
@@ -2521,11 +2522,11 @@
                                 </tr>                            </tbody>
                         </table>
                     </div><div class="api-one">
-                        <h3 id="43ac240938ed4f3296016f20fe886fb9">获取配置</h3>
+                        <h3 id="43ac240938ed4f3296016f20fe886fb9">获取配置（完成）</h3>
 
                         <p>请求方式：GET</p>
                         <p>
-                            请求地址：http://                        </p>
+                            请求地址：{{host}}/v1/settingInfo                        </p>
                         
                         <table class="table table-hover">
                                 <colgroup>
@@ -2606,10 +2607,13 @@
         "restColour":"#ffffff",
         "taskFinish":1,
         "taskFinishRing":"名称",
+        "taskRingUrl":"http://www.baidu.com",
         "restFinish":1,
         "restFinishRing":"名称2",
+        "restRingUrl":"http://www.baidu.com",
         "noise":1,
         "noiseRing":"名称3",
+        "noiseRingUrl":"http://www.baidu.com",
         "taskTime":15,
         "sortRest":5,
         "longRest":15,
@@ -2713,8 +2717,20 @@
                                     <th>integer</th>
                                 </tr><tr>
                                     <td>result.strict</td>
-                                    <td>strict</td>
+                                    <td>严格模式，0是关，1是开，默认是开</td>
                                     <th>integer</th>
+                                </tr><tr>
+                                    <td>result.taskRingUrl</td>
+                                    <td>任务完成URL</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>result.restRingUrl</td>
+                                    <td>休息完成URL</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>result.noiseRingUrl</td>
+                                    <td>白噪音URL</td>
+                                    <th>string</th>
                                 </tr>                            </tbody>
                         </table>
                     </div>
