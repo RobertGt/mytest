@@ -18,6 +18,8 @@ Route::post([
     'v1/taskSort'          => 'api/Task/taskSort',
     'v1/taskUpload'        => 'api/Task/taskUpload',
 
+    'v1/articleShare'      => 'api/article/articleShare',
+
     'v1/setting'           => 'api/Configure/setting',
 ]);
 
@@ -34,7 +36,6 @@ Route::get([
 
     'v1/articleList'       => 'api/article/articleList',
     'v1/articleInfo'       => 'api/article/articleInfo',
-    'v1/articleShare'      => 'api/article/articleShare',
 
     'v1/settingInfo'       => 'api/Configure/settingInfo',
     'v1/theme'             => 'api/Configure/theme',
