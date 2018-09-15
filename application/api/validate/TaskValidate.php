@@ -50,7 +50,7 @@ class TaskValidate extends Validate
     public function checkTaskId($taskId, $rule, $data)
     {
         if(!$taskId || !authcode($taskId)){
-            return 'taskId错误';
+            return '任务错误';
         }
 
         return true;

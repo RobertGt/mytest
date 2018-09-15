@@ -28,7 +28,7 @@ class ArticleValidate extends Validate
     public function checkArticle($articleId, $rule, $data)
     {
         if(!$articleId || !authcode($articleId)){
-            return 'taskId错误';
+            return '文章错误';
         }
 
         return true;

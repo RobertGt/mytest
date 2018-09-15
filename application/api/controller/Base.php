@@ -26,9 +26,15 @@ class Base
     {
         $request = Request::instance();
 
+        $pass = ['articleInfo'];
+
         $nonce     = $request->header('nonce', '');
         $timestamp = $request->header('timestamp', '');
         $sign      = $request->header('sign', '');
+
+        if(in_array($request->action(), $pass, true)){
+            return true;
+        }
 
         if(!$sign){
             ajax_info(400, 'invalid signature');
