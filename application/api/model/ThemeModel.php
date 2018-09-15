@@ -9,7 +9,9 @@
 namespace app\api\model;
 
 
-class ThemeModel
+use think\Model;
+
+class ThemeModel extends Model
 {
     protected $table = 'bas_theme';
     protected $pk = 'themeId';
