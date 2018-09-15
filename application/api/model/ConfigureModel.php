@@ -27,7 +27,7 @@ class ConfigureModel extends Model
                    c.restFinish, r2.ringName restFinishRing, r2.ringUrl restRingUrl, c.noise, r3.ringName noiseRing, r3.ringUrl noiseRingUrl, 
                    c.taskTime, c.sortRest, c.longRest, c.taskNum, c.autoNext, c.screenOn, c.shockOn, c.strict";
         $setting = $this->alias('c')
-                        ->join($this->themeModel . ' t' , 't.theme = c.theme', 'LEFT')
+                        ->join($this->themeModel . ' t' , 't.themeId = c.theme', 'LEFT')
                         ->join($this->ringModel . ' r1' , 'r1.ringId = c.taskFinish', 'LEFT')
                         ->join($this->ringModel . ' r2' , 'r2.ringId = c.restFinish', 'LEFT')
                         ->join($this->ringModel . ' r3' , 'r3.ringId = c.noise', 'LEFT')
