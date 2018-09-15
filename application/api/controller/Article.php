@@ -60,7 +60,7 @@ class Article extends Base
         $response = (new ArticleServer())->articleInfo($param['articleId']);
 
         if($response){
-            return view('articleInfo', $response);
+            return view('articleInfo', ['response' => $response]);
         }else{
             exit();
         }
