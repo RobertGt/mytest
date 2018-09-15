@@ -13,6 +13,9 @@ use think\Model;
 
 class ArticleModel extends Model
 {
+    protected $table = 'bas_article';
+    protected $pk = 'articleId';
+
     public function articleList($pageNum = 1, $pageSize = 10)
     {
         $where['state'] = 1;
