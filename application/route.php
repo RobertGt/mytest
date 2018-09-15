@@ -32,8 +32,8 @@ Route::get([
     'v1/coveStatistic'     => 'api/Statistic/coveStatistic',
     'v1/coveCurve'         => 'api/Statistic/coveCurve',
 
-    'v1/articleList'       => 'api/Article/articleList',
-    'v1/articleInfo'       => 'api/Article/articleInfo',
+    'v1/articleList'       => 'api/article/articleList',
+    'v1/articleInfo'       => 'api/article/articleInfo',
 
     'v1/settingInfo'       => 'api/Configure/settingInfo',
     'v1/theme'             => 'api/Configure/theme',

@@ -9,15 +9,60 @@
 namespace app\api\controller;
 
 
+use app\api\server\ArticleServer;
+use app\api\validate\ArticleValidate;
+use think\Request;
+
 class Article extends Base
 {
-    public function articleList()
+    public function articleList(Request $request)
     {
+        $param = [
+            'pageNum'  => $request->param('pageNum',1,'intval'),
+            'pageSize' => $request->param('pageSize',10,'intval'),
+        ];
 
+        $response = (new ArticleServer())->articleList($param, $request->domain());
+
+        ajax_info(0,'success', $response);
     }
 
-    public function articleInfo()
+    public function articleShare(Request $request)
     {
+        $param = [
+            'articleId'  => $request->param('articleId','')
+        ];
 
+        $validate = new ArticleValidate();
+        if(!$validate->scene('checkArticle')->check($param)){
+            ajax_info(1 , $validate->getError());
+        }
+        $response = (new ArticleServer())->articleShare($param['articleId']);
+
+        if($response){
+            ajax_info(0,'success');
+        }else{
+            ajax_info(1,'分享上传失败');
+        }
+    }
+
+    public function articleInfo(Request $request)
+    {
+        $param = [
+            'articleId'  => $request->param('articleId','')
+        ];
+
+        $validate = new ArticleValidate();
+        if(!$validate->scene('checkArticle')->check($param)){
+            exit();
+        }
+
+        $response = (new ArticleServer())->articleInfo($param['articleId']);
+
+        if($response){
+            return view('articleInfo', $response);
+        }else{
+            exit();
+        }
     }
 }
