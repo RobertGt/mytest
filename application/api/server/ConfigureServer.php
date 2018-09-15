@@ -53,7 +53,7 @@ class ConfigureServer
         if($setting){
             $response = $setting->getData();
             $response['taskRingUrl'] = urlCompletion($response['taskRingUrl']);
-            $response['ringUrl'] = urlCompletion($response['ringUrl']);
+            $response['restRingUrl'] = urlCompletion($response['restRingUrl']);
             $response['noiseRingUrl'] = urlCompletion($response['noiseRingUrl']);
             $response['taskColour'] = $response['taskColour'] ? $response['taskColour'] : "无";
             $response['restColour'] = $response['restColour'] ? $response['restColour'] : "无";
