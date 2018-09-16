@@ -50,7 +50,7 @@ class TaskModel extends Model
         $table = $this->table;
         $taskList = $this->field('taskId')->where('imei', 'IN', function ($query) use ($taskId, $table) {
                         $query->table($table)->where(['taskId' => $taskId])->field('imei');
-                    })->where('isDelete', 0)->select();
+                    })->where('isDelete', 0)->order('sort DESC, updateTime DESC')->select();
 
         return $taskList;
     }

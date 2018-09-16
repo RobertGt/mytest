@@ -145,6 +145,12 @@ class TaskServer
 
         $afterId = $param['afterId'] ? authcode($param['afterId']) : 0;
 
+        //相等代表没移动
+        if($afterId == $taskId){
+            return true;
+        }
+
+        //查询IMEI所有的task
         $taskList =  $taskModel->imeiTaskListByTaskId($taskId);
 
         $task = [];
@@ -154,12 +160,13 @@ class TaskServer
         $count = count($taskList);
         foreach ($taskList as $key => $value){
             $info = $value->getData();
+            //把需要移动的元素拿出来
             if($info['taskId'] == $taskId){
                 $moveKey = $key;
                 $moveInfo = $taskId;
                 continue;
             }
-
+            //获取移动的位置
             if($value['taskId'] == $afterId){
                 $afterKey = $key;
             }
@@ -170,7 +177,7 @@ class TaskServer
         if(!$moveKey && !$afterKey && !$moveInfo){
             return true;
         }
-
+        //如果是0，则移到第一,否则在指定位置插入
         if(!$afterId){
             array_unshift($task, $taskId);
         }else{
