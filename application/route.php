@@ -22,8 +22,8 @@ Route::post([
 
     'v1/setting'           => 'api/Configure/setting',
 
-    'admin/login'          => 'api/Index/login',
-    'admin/reset'          => 'api/Index/reset',
+    'admin/login'          => 'admin/Index/login',
+    'admin/reset'          => 'admin/Index/reset',
 ]);
 
 Route::get([
