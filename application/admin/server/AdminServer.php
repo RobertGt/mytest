@@ -44,7 +44,7 @@ class AdminServer
 
         $save['loginTime'] = time();
         $save['loginIp'] = getClientIp();
-        $save['loginCount'] = ['exp', '+1'];
+        $save['loginCount'] = ['inc', 1];
         $save['token'] = md5($save['loginTime'] . $param['account'] . rand(100, 999));
         try{
             (new AdminModel())->save($save, ['aid' => $checkPassword['aid']]);
@@ -69,6 +69,7 @@ class AdminServer
             Log::error("reset error:" . $e->getMessage());
             return false;
         }
+        return true;
     }
 
     public function checkPassword($account = '', $password = '')
