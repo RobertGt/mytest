@@ -6,11 +6,10 @@
  * Email: 1183@mapgoo.net
  */
 
-namespace app\api\controller;
+namespace app\admin\controller;
 
 
 use app\admin\server\AdminServer;
-use think\Config;
 use think\Request;
 
 class Base

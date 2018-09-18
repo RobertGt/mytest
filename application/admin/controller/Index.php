@@ -1,5 +1,5 @@
 <?php
-namespace app\api\controller;
+namespace app\admin\controller;
 
 use app\admin\server\AdminServer;
 use app\admin\validate\LoginValidate;
