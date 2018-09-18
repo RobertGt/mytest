@@ -21,6 +21,9 @@ Route::post([
     'v1/articleShare'      => 'api/article/articleShare',
 
     'v1/setting'           => 'api/Configure/setting',
+
+    'admin/login'          => 'api/Index/login',
+    'admin/reset'          => 'api/Index/reset',
 ]);
 
 Route::get([
