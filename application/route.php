@@ -24,6 +24,9 @@ Route::post([
 
     'admin/login'          => 'admin/Index/login',
     'admin/reset'          => 'admin/Index/reset',
+
+    'admin/adminInsert'      => 'admin/Admin/adminInsert',
+    'admin/adminUpdate'      => 'admin/Admin/adminUpdate',
 ]);
 
 Route::get([
@@ -43,4 +46,7 @@ Route::get([
     'v1/settingInfo'       => 'api/Configure/settingInfo',
     'v1/theme'             => 'api/Configure/theme',
     'v1/ring'              => 'api/Configure/ring',
+
+    'admin/adminList'      => 'admin/Admin/adminList',
+    'admin/adminDelete'    => 'admin/Admin/adminDelete'
 ]);

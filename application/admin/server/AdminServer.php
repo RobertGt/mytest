@@ -24,7 +24,7 @@ class AdminServer
             $where['token'] = $token;
         }
 
-        $adminInfo = (new AdminModel())->field('aid, account, password, createTime')->where($where)->find();
+        $adminInfo = (new AdminModel())->field('aid, account, password, createTime, remark')->where($where)->find();
 
         if($adminInfo){
             $adminInfo = $adminInfo->getData();
@@ -33,6 +33,32 @@ class AdminServer
             $adminInfo = [];
         }
         return $adminInfo;
+    }
+
+    public function adminList($param = [])
+    {
+        $where = [];
+        if($param['account']){
+            $where['account'] = ['like', '%' . $param['account'] . '%'];
+        }
+        $adminModel = new AdminModel();
+        $total = $adminModel->where($where)->count();
+        $list = $adminModel->where($where)->field('aid, account, remark, createTime, loginTime, loginIp, loginCount, remark')
+                ->page($param['pageNum'], $param['pageSize'])
+                ->order("createTime desc")
+                ->select();
+        $response['row'] = [];
+        $rowNum = ($param['pageNum'] - 1) * $param['pageSize'];
+        $i = 1;
+        foreach ($list as $value){
+            $info = $value->getData();
+            $info['createTime'] = date('Y-m-d H:i:s', $info['createTime']);
+            $info['loginTime'] = date('Y-m-d H:i:s', $info['loginTime']);
+            $info['row'] = $i + $rowNum;
+            $response['row'][] = $info;
+        }
+        $response['total'] = (int)$total;
+        return $response;
     }
 
     public function login($param = [])
@@ -87,5 +113,49 @@ class AdminServer
         }else{
             return false;
         }
+    }
+
+    public function adminDelete($aid = 0)
+    {
+        try{
+            $where['aid'] =$aid;
+            (new AdminModel())->where($where)->delete();
+        }catch (Exception $e){
+            Log::error("adminDelete error:" . $e->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public function adminInsert($param = [])
+    {
+        $create['account'] = $param['account'];
+        $create['salt'] = getRandStr();
+        $create['password'] = md5($param['password'] . $create['salt']);
+        $create['remark'] = $param['remark'];
+        try{
+            (new AdminModel())->create($create);
+        }catch (Exception $e){
+            Log::error("adminInsert error:" . $e->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public function adminUpdate($param = [])
+    {
+        $save['account'] = $param['account'];
+        if($param['password']){
+            $save['salt'] = getRandStr();
+            $save['password'] = md5($param['password'] . $save['salt']);
+        }
+        $save['remark'] = $param['remark'];
+        try{
+            (new AdminModel())->save($save, ['aid' => $param['aid']]);
+        }catch (Exception $e){
+            Log::error("adminUpdate error:" . $e->getMessage());
+            return false;
+        }
+        return true;
     }
 }
