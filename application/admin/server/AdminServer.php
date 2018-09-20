@@ -38,8 +38,8 @@ class AdminServer
     public function adminList($param = [])
     {
         $where = [];
-        if($param['seach']){
-            $where['seach'] = ['like', '%' . $param['seach'] . '%'];
+        if(!empty($param['seach']['account'])){
+            $where['seach'] = ['like', '%' . $param['seach']['account'] . '%'];
         }
         $adminModel = new AdminModel();
         $total = $adminModel->where($where)->count();
