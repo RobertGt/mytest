@@ -146,7 +146,9 @@ class AdminServer
 
     public function adminUpdate($param = [])
     {
-        $save['account'] = $param['account'];
+        if($param['aid'] != 1){
+            $save['account'] = $param['account'];
+        }
         if($param['password']){
             $save['salt'] = getRandStr();
             $save['password'] = md5($param['password'] . $save['salt']);
