@@ -39,7 +39,7 @@ class AdminServer
     {
         $where = [];
         if(!empty($param['seach']['account'])){
-            $where['seach'] = ['like', '%' . $param['seach']['account'] . '%'];
+            $where['account'] = ['like', '%' . $param['seach']['account'] . '%'];
         }
         $adminModel = new AdminModel();
         $total = $adminModel->where($where)->count();
