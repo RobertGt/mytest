@@ -22,13 +22,14 @@ class TaskModel extends Model
 
     public function taskList($imei = '', $pageNum = 1, $pageSize = 10)
     {
-        $where['isDelete'] = 0;
+        $where['t.isDelete'] = 0;
         if($imei){
-            $where['imei'] = $imei;
+            $where['t.imei'] = $imei;
         }
         $task = $this->alias('t')
                     ->join($this->iconModel . ' i' , 't.iconId = i.iconId' , 'LEFT')
                     ->field('t.taskId, t.taskName, t.colour, i.iconUrl')
+                    ->where($where)
                     ->page($pageNum, $pageSize)
                     ->order('t.sort DESC, t.updateTime DESC')
                     ->select();
