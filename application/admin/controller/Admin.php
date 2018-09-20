@@ -31,7 +31,7 @@ class Admin extends Base
     public function adminDelete(Request $request)
     {
         $param = [
-            'aid'  => $request->param('aid',0, 'intval')
+            'aid'  => $request->param('id',0, 'intval')
         ];
 
         $response = (new AdminServer())->adminDelete($param['aid']);
@@ -68,7 +68,7 @@ class Admin extends Base
     public function adminUpdate(Request $request)
     {
         $param = [
-            'aid'     => $request->param('aid',0, 'intval'),
+            'aid'       => $request->param('id',0, 'intval'),
             'account'  => $request->param('account',''),
             'password' => $request->param('password',''),
             'remark'   => $request->param('remark','')

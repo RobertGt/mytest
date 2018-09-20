@@ -43,7 +43,7 @@ class AdminServer
         }
         $adminModel = new AdminModel();
         $total = $adminModel->where($where)->count();
-        $list = $adminModel->where($where)->field('aid, account, remark, createTime, loginTime, loginIp, loginCount, remark')
+        $list = $adminModel->where($where)->field('aid id, account, remark, createTime, loginTime, loginIp, loginCount, remark')
                 ->page($param['pageNum'], $param['pageSize'])
                 ->order("createTime desc")
                 ->select();

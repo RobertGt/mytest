@@ -16,7 +16,7 @@ use think\Validate;
 class LoginValidate extends Validate
 {
     protected $rule = [
-        'aid'            => 'require',
+        'id'             => 'require',
         'account'        => 'require|max:10',
         'password'       => 'require|min:6',
         'newPassword'    => 'require|min:6|checkPassword',
@@ -27,7 +27,7 @@ class LoginValidate extends Validate
         'login'        =>  ['account', 'password'],
         'reset'        =>  ['account', 'password', 'newPassword', 'repeatPassword'],
         'insert'       =>  ['account' => 'require|max:10|checkAccount', 'password'],
-        'update'       =>  ['aid', 'account' => 'require|max:10|checkUpdateAccount', 'password' => 'min:6'],
+        'update'       =>  ['id', 'account' => 'require|max:10|checkUpdateAccount', 'password' => 'min:6'],
     ];
 
     public function checkPassword($newPassword, $rule, $data)
