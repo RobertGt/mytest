@@ -18,7 +18,7 @@ class Admin extends Base
     public function adminList(Request $request)
     {
         $param = [
-            'account'  => $request->param('account',''),
+            'seach'    => $request->param('seach',''),
             'pageNum'  => $request->param('pageNum',1,'intval'),
             'pageSize' => $request->param('pageSize',10,'intval'),
         ];

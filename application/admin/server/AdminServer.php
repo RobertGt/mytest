@@ -38,8 +38,8 @@ class AdminServer
     public function adminList($param = [])
     {
         $where = [];
-        if($param['account']){
-            $where['account'] = ['like', '%' . $param['account'] . '%'];
+        if($param['seach']){
+            $where['seach'] = ['like', '%' . $param['seach'] . '%'];
         }
         $adminModel = new AdminModel();
         $total = $adminModel->where($where)->count();
@@ -54,6 +54,7 @@ class AdminServer
             $info = $value->getData();
             $info['createTime'] = date('Y-m-d H:i:s', $info['createTime']);
             $info['loginTime'] = date('Y-m-d H:i:s', $info['loginTime']);
+            $info['remark'] = $info['remark'] ? $info['remark']  : '';
             $info['row'] = $i + $rowNum;
             $response['row'][] = $info;
         }
@@ -117,8 +118,9 @@ class AdminServer
 
     public function adminDelete($aid = 0)
     {
+        if($aid == 1)return false;
         try{
-            $where['aid'] =$aid;
+            $where['aid'] = $aid;
             (new AdminModel())->where($where)->delete();
         }catch (Exception $e){
             Log::error("adminDelete error:" . $e->getMessage());
