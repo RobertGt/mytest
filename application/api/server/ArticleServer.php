@@ -48,12 +48,12 @@ class ArticleServer
         return $response;
     }
 
-    public function articleInfo($articleId = '')
+    public function articleInfo($articleId = '', $view = false)
     {
         $articleId = authcode($articleId);
 
         try{
-            $response = (new ArticleModel())->articleInfo($articleId);
+            $response = (new ArticleModel())->articleInfo($articleId, $view);
         }catch (Exception $e){
             Log::error("articleInfo error:" . $e->getMessage());
             return false;

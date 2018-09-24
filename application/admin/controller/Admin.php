@@ -34,6 +34,19 @@ class Admin extends Base
             'aid'  => $request->param('id',0, 'intval')
         ];
 
+        if($param['aid'] == 1){
+            ajax_info(1 , "无法删除系统管理员");
+        }
+
+        if($this->adminInfo['aid'] != 1){
+            ajax_info(1 , "无权操作");
+        }
+
+        $validate = new LoginValidate();
+        if(!$validate->scene('checkId')->check($param)){
+            ajax_info(1 , $validate->getError());
+        }
+
         $response = (new AdminServer())->adminDelete($param['aid']);
 
         if($response){
@@ -46,10 +59,14 @@ class Admin extends Base
     public function adminInsert(Request $request)
     {
         $param = [
-            'account'  => $request->param('account',''),
-            'password' => $request->param('password',''),
+            'account'  => $request->param('username',''),
+            'password' => $request->param('newPassword',''),
             'remark'   => $request->param('remark','')
         ];
+
+        if($this->adminInfo['aid'] != 1){
+            ajax_info(1 , "无权操作");
+        }
 
         $validate = new LoginValidate();
         if(!$validate->scene('insert')->check($param)){
@@ -65,14 +82,37 @@ class Admin extends Base
         }
     }
 
+    public function adminInfo(Request $request)
+    {
+        $param = [
+            'aid'       => $request->param('aid',0, 'intval'),
+        ];
+
+        $validate = new LoginValidate();
+        if(!$validate->scene('checkId')->check($param)){
+            ajax_info(1 , $validate->getError());
+        }
+
+        $response = (new AdminServer())->adminInfo($param['aid']);
+        if($response){
+            ajax_info(0,'success', $response, false);
+        }else{
+            ajax_info(1,'获取详情失败');
+        }
+    }
+
     public function adminUpdate(Request $request)
     {
         $param = [
             'aid'       => $request->param('id',0, 'intval'),
-            'account'  => $request->param('account',''),
-            'password' => $request->param('password',''),
+            'account'  => $request->param('username',''),
+            'password' => $request->param('editPassword',''),
             'remark'   => $request->param('remark','')
         ];
+
+        if($this->adminInfo['aid'] != 1){
+            ajax_info(1 , "无权操作");
+        }
 
         $validate = new LoginValidate();
         if(!$validate->scene('update')->check($param)){

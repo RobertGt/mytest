@@ -53,10 +53,12 @@ class AdminServer
         foreach ($list as $value){
             $info = $value->getData();
             $info['createTime'] = date('Y-m-d H:i:s', $info['createTime']);
-            $info['loginTime'] = date('Y-m-d H:i:s', $info['loginTime']);
+            $info['loginTime'] = $info['loginTime'] ? date('Y-m-d H:i:s', $info['loginTime']) : '';
             $info['remark'] = $info['remark'] ? $info['remark']  : '';
+            $info['loginIp'] = $info['loginIp'] ? $info['loginIp']  : '';
             $info['row'] = $i + $rowNum;
             $response['row'][] = $info;
+            $i++;
         }
         $response['total'] = (int)$total;
         return $response;

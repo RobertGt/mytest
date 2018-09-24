@@ -16,7 +16,7 @@ use think\Validate;
 class LoginValidate extends Validate
 {
     protected $rule = [
-        'id'             => 'require',
+        'aid'            => 'require',
         'account'        => 'require|max:10',
         'password'       => 'require|min:6',
         'newPassword'    => 'require|min:6|checkPassword',
@@ -27,7 +27,8 @@ class LoginValidate extends Validate
         'login'        =>  ['account', 'password'],
         'reset'        =>  ['account', 'password', 'newPassword', 'repeatPassword'],
         'insert'       =>  ['account' => 'require|max:10|checkAccount', 'password'],
-        'update'       =>  ['id', 'account' => 'require|max:10|checkUpdateAccount', 'password' => 'min:6'],
+        'update'       =>  ['aid', 'account' => 'require|max:10|checkUpdateAccount', 'password' => 'min:6'],
+        'checkId'      =>  ['aid'],
     ];
 
     public function checkPassword($newPassword, $rule, $data)
@@ -52,6 +53,9 @@ class LoginValidate extends Validate
 
     public function checkUpdateAccount($account, $rule, $data)
     {
+        if($data['aid'] == 1){
+            return true;
+        }
         $admin = (new AdminModel())->where(['account' => $account, 'aid' => ['neq', $data['aid']]])->field("aid")->find();
         if($admin){
             return "账号名已存在";

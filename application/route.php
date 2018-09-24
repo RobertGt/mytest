@@ -27,6 +27,27 @@ Route::post([
 
     'admin/adminInsert'      => 'admin/Admin/adminInsert',
     'admin/adminUpdate'      => 'admin/Admin/adminUpdate',
+
+    'admin/themeInsert'      => 'admin/Theme/themeInsert',
+    'admin/themeUpdate'      => 'admin/Theme/themeUpdate',
+
+    'admin/iconInsert'      => 'admin/Icon/iconInsert',
+    'admin/iconUpdate'      => 'admin/Icon/iconUpdate',
+
+    'admin/ringInsert'      => 'admin/Ring/ringInsert',
+    'admin/ringUpdate'      => 'admin/Ring/ringUpdate',
+
+    'admin/noiseInsert'      => 'admin/Noise/noiseInsert',
+    'admin/noiseUpdate'      => 'admin/Noise/noiseUpdate',
+
+    'admin/articleInsert'      => 'admin/Article/articleInsert',
+    'admin/articleUpdate'      => 'admin/Article/articleUpdate',
+    'admin/articlePublish'     => 'admin/Article/articlePublish',
+    'admin/articleSort'        => 'admin/Article/articleSort',
+
+    'admin/uploadIcon'         => 'admin/Index/uploadIcon',
+    'admin/uploadRing'         => 'admin/Index/uploadRing',
+    'admin/uploadThumb'        => 'admin/Index/uploadThumb',
 ]);
 
 Route::get([
@@ -48,5 +69,27 @@ Route::get([
     'v1/ring'              => 'api/Configure/ring',
 
     'admin/adminList'      => 'admin/Admin/adminList',
-    'admin/adminDelete'    => 'admin/Admin/adminDelete'
+    'admin/adminDelete'    => 'admin/Admin/adminDelete',
+    'admin/adminInfo'      => 'admin/Admin/adminInfo',
+
+
+    'admin/themeList'      => 'admin/Theme/themeList',
+    'admin/themeDelete'    => 'admin/Theme/themeDelete',
+    'admin/themeInfo'      => 'admin/Theme/themeInfo',
+
+    'admin/iconList'      => 'admin/Icon/iconList',
+    'admin/iconDelete'    => 'admin/Icon/iconDelete',
+    'admin/iconInfo'      => 'admin/Icon/iconInfo',
+
+    'admin/ringList'      => 'admin/Ring/ringList',
+    'admin/ringDelete'    => 'admin/Ring/ringDelete',
+    'admin/ringInfo'      => 'admin/Ring/ringInfo',
+
+    'admin/noiseList'      => 'admin/Noise/noiseList',
+    'admin/noiseDelete'    => 'admin/Noise/noiseDelete',
+    'admin/noiseInfo'      => 'admin/Noise/noiseInfo',
+
+    'admin/articleList'      => 'admin/Article/articleList',
+    'admin/articleDelete'    => 'admin/Article/articleDelete',
+    'admin/articleInfo'      => 'admin/Article/articleInfo',
 ]);

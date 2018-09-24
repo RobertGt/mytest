@@ -40,7 +40,7 @@ class TaskValidate extends Validate
             return '任务名称不能为空';
         }
 
-        if(mb_strlen($taskName) > 15){
+        if(mb_strlen($taskName, 'utf8') > 15){
             return '任务名称不得超过15位字符';
         }
 

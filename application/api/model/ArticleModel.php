@@ -18,7 +18,7 @@ class ArticleModel extends Model
 
     public function articleList($pageNum = 1, $pageSize = 10)
     {
-        $where['state'] = 1;
+        $where['state'] = 0;
         return $this->field("articleId, thumb, title, describe, read, share")
                     ->where($where)
                     ->page($pageNum, $pageSize)
@@ -33,11 +33,13 @@ class ArticleModel extends Model
         return $this->where($where)->setInc('share');
     }
 
-    public function articleInfo($articleId)
+    public function articleInfo($articleId, $view = false)
     {
-        $where['state'] = 1;
+        //$where['state'] = 1;
         $where['articleId'] = $articleId;
-        $this->where($where)->setInc('read');
-        return $this->where($where)->field('title, content, read, share, createTime')->find();
+        if(!$view){
+            $this->where($where)->setInc('read');
+        }
+        return $this->where($where)->field('title, content, read, share, author, createTime')->find();
     }
 }

@@ -49,7 +49,8 @@ class Article extends Base
     public function articleInfo(Request $request)
     {
         $param = [
-            'articleId'  => $request->param('articleId','')
+            'articleId'  => $request->param('articleId',''),
+            'view'       => $request->param('view') ? 1 : 0
         ];
 
         $validate = new ArticleValidate();
@@ -57,7 +58,7 @@ class Article extends Base
             exit();
         }
 
-        $response = (new ArticleServer())->articleInfo($param['articleId']);
+        $response = (new ArticleServer())->articleInfo($param['articleId'], $param['view']);
 
         if($response){
             return view('articleInfo', ['response' => $response]);

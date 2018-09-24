@@ -12,6 +12,9 @@
 // [ 应用入口文件 ]
 
 // 定义应用目录
+header("Access-Control-Allow-Origin:*");
+header('Access-Control-Allow-Headers:x-requested-with, content-type, token');
 define('APP_PATH', __DIR__ . '/../application/');
+define('WEB_HTTP', 'http://' . $_SERVER['HTTP_HOST']);
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
