@@ -56,7 +56,7 @@ class TaskFinishModel extends Model
         $distribution = $this->alias('f')
                     ->join($this->taskModel . ' t' , 't.taskId = f.taskId')
                     ->where($where)
-                    ->field('max(t.taskName) taskName, sum(f.second) hour')
+                    ->field('max(t.taskName) taskName, sum(f.second) hour, max(colour) colour')
                     ->group("t.taskId")
                     ->select();
 

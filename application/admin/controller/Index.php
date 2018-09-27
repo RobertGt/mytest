@@ -51,51 +51,38 @@ class Index
         }
     }
 
-    public function uploadIcon(Request $request)
+    public function uploadFile(Request $request)
     {
-        $file = $request->file('icon');
-        // 移动到框架应用根目录/public/uploads/ 目录下
+        $fileConfig = [
+            'icon'  =>  [
+                'size'   =>  1048576,
+                'ext'    =>  'jpg,png'
+            ],
+            'ring'  =>  [
+                'size'   =>  5242880,
+                'ext'    =>  'mp3,wma,mp4,act'
+            ],
+            'thumbFile'  =>  [
+                'size'   =>  2097152,
+                'ext'    =>  'jpg,png'
+            ]
+        ];
+        $files = $request->file();
         $root = ROOT_PATH . 'public';
-        $path = DS . 'uploads' . DS . 'icon';
-        if($file){
-            $info = $file->validate(['size' => 1048576,'ext'=>'jpg,png'])->move($root . $path);
-            if($info){
-                $response['savePath'] = $path . DS . $info->getSaveName();
-                $response['viewUrl'] = urlCompletion($response['savePath']);
-                ajax_info(0, 'success', $response);
-            }else{
-                ajax_info(1,$file->getError());
-            }
-        }
-        ajax_info(1,"文件上传失败");
-    }
 
-    public function uploadRing(Request $request)
-    {
-        $file = $request->file('ring');
-        // 移动到框架应用根目录/public/uploads/ 目录下
-        $root = ROOT_PATH . 'public';
-        $path = DS . 'uploads' . DS . 'ring';
-        if($file){
-            $info = $file->validate(['size' => 5242880,'ext'=>'mp3,wma,mp4,act'])->move($root . $path);
-            if($info){
-                $response['savePath'] = $path . DS . $info->getSaveName();
-                $response['viewUrl'] = urlCompletion($response['savePath']);
-                ajax_info(0, 'success', $response);
-            }else{
-                ajax_info(1,$file->getError());
+        $file = '';
+        foreach ($files as $key => $value){
+            if(isset($fileConfig[$key])){
+                $path = DS . 'uploads' . DS . $key;
+                $validate = $fileConfig[$key];
+                $file = $value;
+                break;
             }
         }
-        ajax_info(1,"文件上传失败");
-    }
-    public function uploadThumb(Request $request)
-    {
-        $file = $request->file('thumbFile');
+
         // 移动到框架应用根目录/public/uploads/ 目录下
-        $root = ROOT_PATH . 'public';
-        $path = DS . 'uploads' . DS . 'thumb';
         if($file){
-            $info = $file->validate(['size' => 2097152,'ext'=>'jpg,png'])->move($root . $path);
+            $info = $file->validate($validate)->move($root . $path);
             if($info){
                 $response['savePath'] = $path . DS . $info->getSaveName();
                 $response['viewUrl'] = urlCompletion($response['savePath']);

@@ -137,9 +137,15 @@ function authcode($string, $operation = 'DECODE', $key = 'b8e40baf97fba28e1bb661
     }
 }
 
+/**
+ * 链接是否需要重新拼接前缀
+ * @param string  $url  需要拼接的URL
+ * @return string
+ */
 function urlCompletion($url)
 {
     if(!filter_var($url,FILTER_VALIDATE_URL)){
+        $url = str_replace('\\', '/', $url);
         $url = WEB_HTTP . $url;
     }
     return $url;

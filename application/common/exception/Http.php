@@ -20,9 +20,8 @@ class Http extends Handle
         if ($e instanceof HttpException) {
             ajax_info($e->getStatusCode(), $e->getMessage());
         }
-        Log::error('Request ' . 'ErrorMsg : ' . $e->getMessage());
-        //交由系统处理
-        //return parent::render($e);
+        //其他错误不做显示，直接打印到错误log
+        Log::error('Request ErrorMsg : ' . $e->getMessage() . ' File : ' . $e->getFile() . ' Line : ' . $e->getLine());
         ajax_info(500, '未知错误!!!');
     }
 }

@@ -86,7 +86,7 @@ class TaskServer
             $icon[] = $info;
         }
         
-        return $info;
+        return $icon;
     }
 
     public function taskUpload($param = [])

@@ -45,9 +45,7 @@ Route::post([
     'admin/articlePublish'     => 'admin/Article/articlePublish',
     'admin/articleSort'        => 'admin/Article/articleSort',
 
-    'admin/uploadIcon'         => 'admin/Index/uploadIcon',
-    'admin/uploadRing'         => 'admin/Index/uploadRing',
-    'admin/uploadThumb'        => 'admin/Index/uploadThumb',
+    'admin/uploadFile'         => 'admin/Index/uploadFile',
 ]);
 
 Route::get([

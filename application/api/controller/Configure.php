@@ -64,7 +64,7 @@ class Configure extends Base
         ajax_info(0,'success', $response, false);
     }
 
-    public function theme(Request $request)
+    public function theme()
     {
         $response = (new ConfigureServer())->theme();
 
