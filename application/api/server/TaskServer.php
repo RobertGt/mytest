@@ -49,7 +49,8 @@ class TaskServer
         try{
             $where['taskId'] = authcode($param['taskId']);
             $where['imei'] = $param['imei'];
-            (new TaskModel())->save(['isDelete' => 1], $where);
+            //(new TaskModel())->save(['isDelete' => 1], $where);
+			(new TaskModel())->where($where)->delete();
         }catch (Exception $e){
             Log::error("taskDelete error:" . $e->getMessage());
             return false;

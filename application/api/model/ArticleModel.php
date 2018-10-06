@@ -18,7 +18,7 @@ class ArticleModel extends Model
 
     public function articleList($pageNum = 1, $pageSize = 10)
     {
-        $where['state'] = 0;
+        $where['state'] = 1;
         return $this->field("articleId, thumb, title, describe, read, share")
                     ->where($where)
                     ->page($pageNum, $pageSize)

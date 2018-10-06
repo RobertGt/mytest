@@ -32,7 +32,7 @@ class Noise extends Base
     public function noiseDelete(Request $request)
     {
         $param = [
-            'ringId'  => $request->param('ringId',0, 'intval'),
+            'ringId'  => $request->param('id',0, 'intval'),
         ];
 
         $validate = new RingValidate();
